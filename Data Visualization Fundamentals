@@ -1,0 +1,37 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+bike_sharing = pd.read_csv('day.csv')
+bike_sharing['dteday'] = pd.to_datetime(bike_sharing['dteday'])
+weekday_averages = bike_sharing.groupby('weekday').mean()[['casual', 'registered']].reset_index() # It's not essential to understand how this code works, we'll cover this in a later course
+
+plt.bar(weekday_averages['weekday'], weekday_averages['registered'])
+plt.xticks([0, 1, 2, 3, 4, 5, 6],labels=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], rotation=30)
+plt.show()
+
+# afther reviewing the the bar chat, registered users d use more bikes on week day. 
+
+
+#analyzing the weather data and compared 2011 and 2012 data
+
+import matplotlib.pyplot as plt
+
+unique_values = [1, 2, 3, 4]
+weather_2011 = [226, 124, 15, 0]
+weather_2012 = [237, 123, 6, 0]
+
+plt.bar(unique_values, weather_2011)
+plt.xticks(ticks=[1,2,3,4])
+plt.title('Weather Patterns: 2011')
+plt.ylabel('Frequency')
+plt.xlabel('Unique Values')
+plt.show()
+
+plt.bar(unique_values, weather_2012)
+plt.xticks(ticks=[1,2,3,4])
+plt.title('Weather Patterns: 2012')
+plt.ylabel('Frequency')
+plt.xlabel('Unique Values')
+plt.show()
+
+#found out that the weather data from these two years are very similar 
