@@ -125,3 +125,66 @@ sns.relplot(x="model_year", y="horsepower",
 
 # Show plot
 plt.show()
+
+
+###Visualizing a Categorical and a Quantitative Variable###
+##Count plots##
+# Separate into column subplots based on age category
+sns.catplot(y="Internet usage", data=survey_data,
+            kind="count",col='Age Category')
+
+# Show plot
+plt.show()
+
+##Bar plots with percentages
+# Create a bar plot of interest in math, separated by gender
+sns.catplot(x="Gender",y='Interested in Math',kind='bar',data=survey_data)
+
+
+# Show plot
+plt.show()
+
+
+##Customizing bar plots##
+# List of categories from lowest to highest
+category_order = ["<2 hours", 
+                  "2 to 5 hours", 
+                  "5 to 10 hours", 
+                  ">10 hours"]
+
+
+# Turn off the confidence intervals
+sns.catplot(x="study_time", y="G3",
+            data=student_data,
+            kind="bar",
+            order=category_order,ci=None)
+
+# Show plot
+plot.show()
+
+
+##Create and interpret a box plot##
+# Specify the category ordering
+study_time_order = ["<2 hours", "2 to 5 hours", 
+                    "5 to 10 hours", ">10 hours"]
+
+# Create a box plot and set the order of the categories
+sns.catplot(x='study_time',y='G3',data=student_data,kind='box',order=study_time_order)
+
+
+
+
+# Show plot
+plt.show()
+
+
+##Omitting outliers##
+# Create a box plot with subgroups and omit the outliers
+sns.catplot(x='internet',y='G3',data=student_data,kind='box',hue='location',sym='')
+
+
+
+
+
+# Show plot
+plt.show()
