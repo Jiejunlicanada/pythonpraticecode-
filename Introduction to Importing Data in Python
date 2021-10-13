@@ -138,3 +138,33 @@ pd.DataFrame.hist(data[['Age']])
 plt.xlabel('Age (years)')
 plt.ylabel('count')
 plt.show()
+
+
+
+##Importing data from other file types##
+# Import pickle package
+import pickle
+
+# Open pickle file and load data: d
+with open('data.pkl', 'rb') as file:
+    d = pickle.load(file)
+
+# Print d
+print(d)
+
+# Print datatype of d
+print(type(d))
+
+
+##Listing sheets in Excel files
+# Import pandas
+import pandas as pd
+
+# Assign spreadsheet filename: file
+file = 'battledeath.xlsx'
+
+# Load spreadsheet: xls
+xls = pd.ExcelFile(file)
+
+# Print sheet names
+print(xls.sheet_names)
