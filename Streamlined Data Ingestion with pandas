@@ -196,3 +196,70 @@ survey_data["Part2EndTime"] = pd.to_datetime(survey_data["Part2EndTime"],
 
 # Print first few values of Part2EndTime
 print(survey_data.Part2EndTime.head())
+
+
+##############################################################Importing Data from Databases###################################################################
+##Connect to a database
+# Import sqlalchemy's create_engine() function
+from sqlalchemy import create_engine
+
+# Create the database engine
+engine = create_engine("sqlite:///data.db")
+
+# View the tables in the database
+print(engine.table_names())
+
+
+##Load entire tables
+# Create the database engine
+engine = create_engine("sqlite:///data.db")
+
+# Create a SQL query to load the entire weather table
+query = """
+SELECT * 
+  FROM weather;
+"""
+
+# Load weather with the SQL query
+weather = pd.read_sql(query, engine)
+
+# View the first few rows of data
+print(weather.head())
+
+
+##Selecting columns with SQL
+# Create database engine for data.db
+engine = create_engine("sqlite:///data.db")
+
+# Write query to get date, tmax, and tmin from weather
+query = """
+SELECT date, 
+       tmax, 
+       tmin
+  FROM weather;
+"""
+
+# Make a data frame by passing query and engine to read_sql()
+temperatures = pd.read_sql(query,engine)
+
+# View the resulting data frame
+print(temperatures)
+
+
+##Selecting rows
+# Create query to get hpd311calls records about safety
+query = """SELECT *
+		     FROM hpd311calls
+            WHERE complaint_type = 'SAFETY';"""
+
+# Query the database and assign result to safety_calls
+safety_calls = pd.read_sql(query, engine)
+
+# Graph the number of safety calls by borough
+call_counts = safety_calls.groupby('borough').unique_key.count()
+call_counts.plot.barh()
+plt.show()
+
+
+
+
